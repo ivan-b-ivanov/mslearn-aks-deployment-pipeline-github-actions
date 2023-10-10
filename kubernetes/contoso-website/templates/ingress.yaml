@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: contoso-website
+  name: {{ printf "contoso-website-%s" .Release.Namespace }}
   namespace: {{ default "staging" .Release.Namespace }}
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
