@@ -5,15 +5,20 @@ metadata:
   namespace: {{ default "staging" .Release.Namespace }}
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
+    # you can add more annotations here if your ingress controller requires them for SSL
 spec:
+  tls:
+  - hosts:
+    - contoso-{{ default "staging" .Release.Namespace }}.{{ .Values.dns.name }}
+    secretName: contoso-production-tls
   rules:
-    - host: contoso-{{ default "staging" .Release.Namespace }}.{{ .Values.dns.name }}
-      http:
-        paths:
-          - backend:
-              service:
-                name: contoso-website
-                port:
-                  name: http
-            path: /
-            pathType: Prefix
+  - host: contoso-{{ default "staging" .Release.Namespace }}.{{ .Values.dns.name }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: contoso-website
+            port:
+              name: http
+        path: /
+        pathType: Prefix
