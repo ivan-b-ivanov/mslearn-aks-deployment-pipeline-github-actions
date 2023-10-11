@@ -1,5 +1,5 @@
 ---
-title: "We are Contoso"
+title: "We are Singlet"
 headless: true
 ---
 
