@@ -39,6 +39,7 @@ jobs:
             ${{secrets.ACR_NAME}}/contoso-website:${{ steps.prep.outputs.branch }}
             ${{secrets.ACR_NAME}}/contoso-website:${{ steps.prep.outputs.tag }}
           push: true
+          no-cache: true
 
   deploy:
     runs-on: ubuntu-20.04
