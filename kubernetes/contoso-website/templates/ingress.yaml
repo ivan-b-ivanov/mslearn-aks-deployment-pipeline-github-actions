@@ -5,15 +5,21 @@ metadata:
   namespace: {{ default "staging" .Release.Namespace }}
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
+    cert-manager.io/cluster-issuer: "letsencrypt-prod" # This should match the name of your Let's Encrypt issuer or clusterissuer
+    # additional annotations depending on your setup
 spec:
+  tls:
+  - hosts:
+    - contoso-{{ default "staging" .Release.Namespace }}.{{ .Values.dns.name }}
+    secretName: contoso-website-tls # cert-manager will create this secret with the retrieved certificate
   rules:
-    - host: contoso-{{ default "staging" .Release.Namespace }}.{{ .Values.dns.name }}
-      http:
-        paths:
-          - backend:
-              service:
-                name: contoso-website
-                port:
-                  name: http
-            path: /
-            pathType: Prefix
+  - host: contoso-{{ default "staging" .Release.Namespace }}.{{ .Values.dns.name }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: contoso-website
+            port:
+              name: http
+        path: /
+        pathType: Prefix
