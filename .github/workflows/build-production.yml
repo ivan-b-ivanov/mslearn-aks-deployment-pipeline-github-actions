@@ -75,3 +75,6 @@ jobs:
             --set image.repository=${{ secrets.ACR_NAME }} \
             --set dns.name=${{ secrets.DNS_NAME }} \
             --set image.tag=${GITHUB_REF##*/}
+      - name: Rollout Restart
+        run: |
+          kubectl rollout restart deployment/contoso-website -n production
