@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-com-tls
+  namespace: production
+spec:
+  secretName: example-com-tls-secret
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: contoso-production.02f4dbf4476c40e6b246.eastus.aksapp.io
+  dnsNames:
+  - contoso-production.02f4dbf4476c40e6b246.eastus.aksapp.io
