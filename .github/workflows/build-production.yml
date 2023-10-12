@@ -54,7 +54,7 @@ jobs:
           version: v3.11.1
 
       - name: Get AKS Credentials
-        uses: Azure/aks-set-context@v1
+        uses: Azure/aks-set-context@v3
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           resource-group: mslearn-gh-pipelines-20999
