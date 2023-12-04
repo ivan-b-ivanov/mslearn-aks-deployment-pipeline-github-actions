@@ -1,5 +1,5 @@
 ---
-title: "We are Here"
+title: "We are"
 headless: true
 ---
 
